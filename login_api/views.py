@@ -30,27 +30,27 @@ def RegisterView(request):
     
         
 def LoginView(request):
-    if request.method=='POST':
-        form=Loginform(request.POST)
+    if request.method == 'POST':
+        form = Loginform(request, data=request.POST)
         if form.is_valid():
-           user = form.get_user()  # Get the authenticated user
-           login(request, user)
-
-           messages.success(request, "Successfully logged in!")
-           return redirect('logout')
+            user = form.get_user()#Get that authenticated user
+            login(request, user)
+            messages.success(request, "Successfully logged in!")
+            return redirect('logout')  # redirect after successful login
         else:
-             form=Loginform()
-             return render(request,'login_api/logout.html',{'form':form})
-       
-             
-
+            # Render login page with errors, NOT logout page
+            return render(request, 'login_api/login.html', {'form': form})
     else:
-        form=Loginform()
-        return render(request,'login_api/login.html',{'form':form})
+        form = Loginform()
+        return render(request, 'login_api/login.html', {'form': form})
     
 def LogoutView(request):
     logout(request)
-    return render(request, 'login_api/login.html')
+   
+   
+
+    
+    return render(request, 'login_api/logout.html')
      
 
     
@@ -131,7 +131,7 @@ def ResetPassword(request, reset_id):
                 messages.error(request, 'Password must be at least 5 characters long')
 
             # Check if reset link expired
-            expiration_time = password_reset.created_at + timezone.timedelta(minutes=10)
+            expiration_time = password_reset.created_when + timezone.timedelta(minutes=10)
             if timezone.now() > expiration_time:
                 password_reset.delete()
                 passwords_have_error = True

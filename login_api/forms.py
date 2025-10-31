@@ -9,8 +9,8 @@ class RegisterForm(UserCreationForm):
         fields=['username','first_name','last_name','email','location']
 
 class Loginform(AuthenticationForm):
-    username=forms.CharField(max_length=100)
-    password=forms.CharField(max_length=100)
+   pass
+
 class ForgotPassword(forms.Form):
     email=forms.EmailField()
 
