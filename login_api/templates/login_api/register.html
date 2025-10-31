@@ -1,0 +1,39 @@
+
+<h1> Student Details Form </h1>
+
+<form method="post">
+
+{% csrf_token %}
+
+{% comment %} <label>Username:</label>
+{{form.username}}
+{{form.username.errors}}
+<br>
+<br>
+
+<label>Firstname:</label>
+{{form.first_name}}
+{{form.first_name.errors}} <br> <br>
+
+<label>LastName:</label>
+{{form.last_name}}
+{{form.last_name.errors}} <br> <br>
+
+<label>Email:</label>
+{{form.email}}
+{{form.email.errors}} <br> <br>
+
+<label >Password:</label>
+{{form.password1}}
+{{form.password1.error}}
+<br> <br>
+
+<label> Confirm Password:</label>
+{{form.password2}}
+{{form.password2.errors}} <br> <br> {% endcomment %}
+    {{ form.as_p }}
+
+<button type='submit'> Submit </button>
+
+</form>
+
